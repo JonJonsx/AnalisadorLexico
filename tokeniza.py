@@ -1,5 +1,3 @@
-import re
-
 # Constantes
 TESTE = False
 
@@ -18,23 +16,16 @@ FLOATS = DIGITOS + PONTO
 
 # caracteres usados em nomes de variáveis
 LETRAS = "_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-# pega variavel [^\W/][\.a-zA-Z_.\d]+
 
 # abre e fecha parenteses
 ABRE_FECHA_PARENTESES = "()"
-# [()]
 
-# categorias
 OPERADOR = 1  # para operadores aritméticos e atribuição
 NUMERO = 2  # para números: todos são considerados float
 VARIAVEL = 3  # para variáveisss
 PARENTESES = 4  # para '(' e ')
 
-# Whitespace characters: space, newline, horizontal tab,
-# vertical tab, form feed, carriage return
 BRANCOS = [' ', '\n', '\t', '\v', '\f', '\r']
-# espaçoes em branco [^a-zA-Z\+][\\n\\t\\v\\f\\r]
-# caractere que indica comentário
 COMENTARIO = "#"
 
 # media_prova = (p1 + p2) #/2
@@ -63,17 +54,3 @@ def tokeniza(exp):
             if exp[index-1] not in LETRAS:
                 resultado.append([float(i), NUMERO])
     return resultado
-    """(str) -> lis
-
-    O componente tipo de um token indica a sua categoria
-    (ver definição de constantes acima).
-
-        - OPERADOR;
-        - NUMERO;
-        - VARIAVEL; ou
-        - PARENTESES
-
-    A funçao ignora tuo que esta na exp apos o caractere
-    COMENTARIO (= "#").
-    """
-    # escreva o seu código abaixo
