@@ -37,7 +37,7 @@ BRANCOS = [' ', '\n', '\t', '\v', '\f', '\r']
 # caractere que indica comentário
 COMENTARIO = "#"
 
-# media_prova = (p1 + p2)/2
+# media_prova = (p1 + p2) #/2
 # ------------------------------------------------------------
 
 
@@ -45,6 +45,8 @@ def tokeniza(exp):
     resultado = []
     variavel_sep = []
     for index, i in enumerate(exp):
+        if i in COMENTARIO:
+            break
         if i in LETRAS:
             variavel_sep.append(i)
             if exp[index+1] in DIGITOS:
@@ -60,31 +62,8 @@ def tokeniza(exp):
         elif i in DIGITOS:
             if exp[index-1] not in LETRAS:
                 resultado.append([float(i), NUMERO])
-
     return resultado
-
-    # elif i in DIGITOS:
-    #     print("teste")
-    # elif i in ABRE_FECHA_PARENTESES:
-    #     print("teste")
-    # elif i in BRANCOS:
-    #     print("teste")
-
-    """(str) -> list
-    Recebe uma string exp representando uma expressão e cria
-    e retorna uma lista com os itens léxicos que formam a
-    expressão.
-
-
-    Cada item léxico (= token) é da forma
-
-        [item, tipo]
-
-    O componente item de um token é
-
-        - um float: no caso do item ser um número; ou
-        - um string no caso do item ser um operador ou
-             uma variável ou um abre/fecha parenteses.
+    """(str) -> lis
 
     O componente tipo de um token indica a sua categoria
     (ver definição de constantes acima).
