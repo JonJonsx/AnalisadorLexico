@@ -10,7 +10,7 @@ DIGITOS = "0123456789"
 
 # ponto decimal
 PONTO = "."
-
+PONTO_E_VIRGULA = ";"
 # todos os caracteres usados em um números float
 FLOATS = DIGITOS + PONTO
 
@@ -24,6 +24,7 @@ OPERADOR = 1  # para operadores aritméticos e atribuição
 NUMERO = 2  # para números: todos são considerados float
 VARIAVEL = 3  # para variáveisss
 PARENTESES = 4  # para '(' e ')
+SEPARADOR = 5
 
 BRANCOS = [' ', '\n', '\t', '\v', '\f', '\r']
 COMENTARIO = "#"
@@ -35,6 +36,7 @@ COMENTARIO = "#"
 def tokeniza(exp):
     resultado = []
     variavel_sep = []
+    numero_completo = []
     for index, i in enumerate(exp):
         if i in COMENTARIO:
             break
@@ -50,7 +52,21 @@ def tokeniza(exp):
             resultado.append([i, OPERADOR])
         elif i in ABRE_FECHA_PARENTESES:
             resultado.append([i, PARENTESES])
+        elif i in PONTO_E_VIRGULA:
+            resultado.append([i, SEPARADOR])
         elif i in DIGITOS:
             if exp[index-1] not in LETRAS:
-                resultado.append([float(i), NUMERO])
+                if index == len(exp) - 1:
+                    numero_completo.append(i)
+                    resultado.append([float("".join(numero_completo)), NUMERO])
+                    numero_completo = []
+                elif exp[index+1] in DIGITOS:
+                    numero_completo.append(i)
+                else:
+                    numero_completo.append(i)
+                    resultado.append([float("".join(numero_completo)), NUMERO])
+                    numero_completo = []
+
+            # if exp[index-1] not in LETRAS:
+            #     resultado.append([float(i), NUMERO])
     return resultado
