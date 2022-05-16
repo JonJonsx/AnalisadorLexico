@@ -38,12 +38,17 @@ def tokeniza(exp):
     resultado = []
     variavel_sep = []
     numero_completo = []
-    exp = ''.join(exp.split(" "))
+    # exp = ''.join(exp.split(" "))
     for index, i in enumerate(exp):
         if i in COMENTARIO:
             break
         if i in LETRAS:
             variavel_sep.append(i)
+            if index+1 == len(exp):
+                variavel_com = ''.join(variavel_sep)
+                resultado.append([variavel_com, VARIAVEL])
+                variavel_sep = []
+                continue
             if exp[index+1] in DIGITOS:
                 variavel_sep.append(exp[index+1])
             if exp[index+1] not in LETRAS:
