@@ -25,6 +25,7 @@ NUMERO = 2  # para números: todos são considerados float
 VARIAVEL = 3  # para variáveisss
 PARENTESES = 4  # para '(' e ')
 SEPARADOR = 5
+NAO_ENCONTRADO = 6
 
 BRANCOS = [' ', '\n', '\t', '\v', '\f', '\r']
 COMENTARIO = "#"
@@ -67,7 +68,8 @@ def tokeniza(exp):
                     numero_completo.append(i)
                     resultado.append([float("".join(numero_completo)), NUMERO])
                     numero_completo = []
-
+        else:
+            resultado.append([i, NAO_ENCONTRADO])
             # if exp[index-1] not in LETRAS:
             #     resultado.append([float(i), NUMERO])
     return resultado
