@@ -37,6 +37,7 @@ def tokeniza(exp):
     resultado = []
     variavel_sep = []
     numero_completo = []
+    exp = ''.join(exp.split(" "))
     for index, i in enumerate(exp):
         if i in COMENTARIO:
             break
